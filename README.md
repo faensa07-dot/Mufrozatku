@@ -1,76 +1,126 @@
-# Mufrodati
+# Mufradat Ceria
 
-Aplikasi pembelajaran mufradat dan Bahasa Arab kelas 4 SD/MI.
+Aplikasi pembelajaran kosakata Bahasa Arab untuk siswa kelas 4 SD/MI. Dibuat dengan React + Vite di sisi frontend dan Node.js + Express di sisi backend. Data awal disimpan dalam file JSON.
 
-## Stack
-- Next.js 15 App Router + TypeScript
-- Tailwind CSS v4
-- Supabase PostgreSQL, Auth, Storage
-- Vercel
+## Fitur
 
-## 1. Persiapan
-Pastikan Node.js 20.9+ dan npm tersedia. Buat project Supabase baru.
+- Materi mufradat berdasarkan tiga kategori: benda di kelas, rumah, dan perpustakaan.
+- Kartu kosakata dengan tulisan Arab berharakat, transliterasi, arti, ilustrasi emoji, dan contoh kalimat.
+- Pelafalan kosakata menggunakan Web Speech API pada browser yang mendukung suara Bahasa Arab.
+- Permainan menjodohkan gambar dengan kosakata Arab.
+- Kuis pilihan ganda dan penghitungan nilai otomatis.
+- Riwayat hasil belajar dan papan peringkat.
+- Nama siswa dan fallback riwayat lokal disimpan pada browser.
+- Backend Express menyediakan API kategori, kosakata, statistik, nilai, dan leaderboard.
 
-```bash
-npm install
-cp .env.example .env.local
-```
+## Persyaratan
 
-Isi `.env.local` dari **Supabase → Project Settings → API**:
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publishable/anon key, bukan service_role)
+- Node.js 18 atau lebih baru
+- npm
 
-## 2. Database dan keamanan
-1. Buka Supabase → SQL Editor.
-2. Jalankan seluruh isi `supabase/schema.sql`.
-3. Di Supabase → Authentication → URL Configuration, set Site URL ke URL lokal saat development (`http://localhost:3000`) dan tambahkan URL Vercel saat deploy.
-4. Daftarkan akun melalui `/register`.
-5. Jadikan akun pertama sebagai admin dengan SQL (ganti email):
-   ```sql
-   update public.profiles
-   set role = 'admin'
-   where id = (select id from auth.users where email = 'email-admin-anda@example.com');
-   ```
-6. Guru dapat diberi role `teacher` oleh admin melalui SQL:
-   ```sql
-   update public.profiles
-   set role = 'teacher'
-   where id = (select id from auth.users where email = 'email-guru@example.com');
-   ```
+## Menjalankan di laptop
 
-**Penting:** registrasi publik selalu membuat role `student`. Jangan pernah menerima role dari form registrasi. Jangan masukkan `service_role` key ke variabel `NEXT_PUBLIC_*` atau ke browser.
+1. Ekstrak folder project.
+2. Buka terminal pada folder `mufradat-ceria`.
+3. Instal dependensi:
 
-## 3. Jalankan
-```bash
-npm run dev
-```
-Buka http://localhost:3000.
-
-## 4. Fitur starter
-- Landing page dan kategori mufradat.
-- Registrasi dan login email/password.
-- Dashboard siswa dan dashboard pengelola.
-- Daftar kosakata berdasarkan kategori.
-- Tambah dan hapus kosakata oleh admin/guru.
-- CRUD kategori dasar.
-- Halaman daftar materi dan kuis (read-only untuk siswa pada starter ini).
-- RLS untuk profil, materi, kosakata, kuis, hasil kuis, progres, dan Storage.
-
-## 5. Deploy ke Vercel
-1. Buat repository GitHub bernama `mufrodati`.
-2. Push kode:
    ```bash
-   git init
-   git add .
-   git commit -m "Initial Mufrodati full-stack app"
-   git branch -M main
-   git remote add origin https://github.com/USERNAME/mufrodati.git
-   git push -u origin main
+   npm install
    ```
-3. Di Vercel pilih **Add New → Project**, import repository `mufrodati`.
-4. Tambahkan `NEXT_PUBLIC_SUPABASE_URL` dan `NEXT_PUBLIC_SUPABASE_ANON_KEY` di Project Settings → Environment Variables.
-5. Deploy.
-6. Tambahkan domain Vercel ke Supabase → Authentication → URL Configuration → Redirect URLs.
 
-## Catatan cakupan
-Ini adalah fondasi full-stack yang dapat dijalankan dan dikembangkan. CRUD kategori dan kosakata sudah tersambung ke Supabase. Modul editor materi, pembuat kuis, penilaian otomatis, upload UI Storage, serta laporan guru masih merupakan tahap implementasi berikutnya. RLS dasar sudah disiapkan; sebelum digunakan untuk data siswa sungguhan, lakukan audit keamanan dan uji kebijakan per role.
+4. Jalankan frontend dan backend bersamaan:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Buka `http://localhost:5173`.
+
+Frontend berjalan pada port `5173`, sedangkan backend API berjalan pada port `4000`.
+
+Jika ingin menjalankan secara terpisah:
+
+```bash
+npm run server
+npm run client
+```
+
+## Struktur penting
+
+```text
+mufradat-ceria/
+├── public/
+├── server/
+│   ├── data/db.json       # Data kategori, kosakata, dan nilai
+│   └── index.js           # Express API
+├── src/
+│   ├── App.jsx            # Antarmuka dan alur pembelajaran
+│   ├── api.js             # Penghubung frontend ke backend
+│   ├── main.jsx
+│   └── styles.css
+├── index.html
+├── package.json
+├── vite.config.js
+└── vercel.json
+```
+
+## API backend
+
+| Method | Endpoint | Keterangan |
+|---|---|---|
+| GET | `/api/health` | Status backend |
+| GET | `/api/categories` | Daftar kategori materi |
+| GET | `/api/vocabulary` | Semua kosakata |
+| GET | `/api/vocabulary?category=kelas` | Kosakata berdasarkan kategori |
+| GET | `/api/vocabulary/:id` | Detail satu kosakata |
+| GET | `/api/stats` | Statistik aplikasi |
+| POST | `/api/scores` | Menyimpan hasil latihan |
+| GET | `/api/scores?student=Nama` | Riwayat nilai siswa |
+| GET | `/api/leaderboard?limit=5` | Papan peringkat |
+
+Contoh body untuk `POST /api/scores`:
+
+```json
+{
+  "studentName": "Aisyah",
+  "mode": "Kuis",
+  "category": "Benda di Kelas",
+  "score": 4,
+  "total": 5
+}
+```
+
+## Deploy frontend ke Vercel
+
+1. Push repository ke GitHub.
+2. Import repository tersebut dari dashboard Vercel.
+3. Framework preset: **Vite**.
+4. Build command: `npm run build`.
+5. Output directory: `dist`.
+6. Tambahkan environment variable:
+
+   ```text
+   VITE_API_URL=https://URL-BACKEND-ANDA/api
+   ```
+
+   Ganti nilai tersebut dengan URL backend yang sudah di-deploy.
+
+File `vercel.json` sudah disertakan untuk mendukung navigasi aplikasi.
+
+## Deploy backend
+
+Backend Express perlu di-deploy sebagai service Node.js terpisah, misalnya di Render:
+
+1. Buat Web Service dari repository GitHub yang sama.
+2. Build command: `npm install`.
+3. Start command: `npm run start:server`.
+4. Atur environment variable `CLIENT_ORIGIN` ke URL frontend Vercel, misalnya `https://nama-aplikasi.vercel.app`.
+5. Setelah backend aktif, salin URL service dan masukkan ke environment variable `VITE_API_URL` di Vercel dengan akhiran `/api`.
+
+### Catatan penyimpanan data
+
+Saat dijalankan lokal, hasil latihan disimpan ke `server/data/db.json`. Pada hosting serverless atau filesystem hosting yang bersifat sementara, perubahan file JSON tidak dijamin bertahan setelah instance berhenti atau deployment baru. Untuk penggunaan online yang benar-benar menyimpan nilai secara permanen, gunakan persistent disk pada hosting backend yang mendukungnya atau migrasikan penyimpanan ke database terkelola. Jangan mengandalkan file JSON lokal sebagai database produksi multi-pengguna.
+
+## Catatan pembelajaran
+
+Kosakata pada project ini merupakan materi contoh awal. Sebelum digunakan dalam pembelajaran formal, cocokkan kembali istilah, harakat, transliterasi, dan contoh kalimat dengan buku ajar Bahasa Arab kelas 4 yang digunakan sekolah. Pelafalan Web Speech API bergantung pada ketersediaan voice Bahasa Arab di perangkat/browser siswa.

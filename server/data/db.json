@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "id": "kelas",
+      "name": "Benda di Kelas",
+      "arabic": "فِي الْفَصْلِ",
+      "description": "Kenali benda-benda yang biasa kamu gunakan saat belajar.",
+      "emoji": "🏫",
+      "color": "peach"
+    },
+    {
+      "id": "rumah",
+      "name": "Benda di Rumah",
+      "arabic": "فِي الْبَيْتِ",
+      "description": "Belajar nama benda yang ada di rumahmu.",
+      "emoji": "🏠",
+      "color": "mint"
+    },
+    {
+      "id": "perpustakaan",
+      "name": "Benda di Perpustakaan",
+      "arabic": "فِي الْمَكْتَبَةِ",
+      "description": "Temukan kosakata yang ada di perpustakaan.",
+      "emoji": "📚",
+      "color": "lavender"
+    }
+  ],
+  "vocabulary": [
+    { "id": "kelas-1", "category": "kelas", "arabic": "كِتَابٌ", "latin": "Kitābun", "meaning": "Buku", "emoji": "📕", "example": "Ini adalah buku." },
+    { "id": "kelas-2", "category": "kelas", "arabic": "قَلَمٌ", "latin": "Qalamun", "meaning": "Pulpen", "emoji": "🖊️", "example": "Saya menulis dengan pulpen." },
+    { "id": "kelas-3", "category": "kelas", "arabic": "مِمْحَاةٌ", "latin": "Mimḥātun", "meaning": "Penghapus", "emoji": "🧽", "example": "Penghapus untuk menghapus tulisan." },
+    { "id": "kelas-4", "category": "kelas", "arabic": "مِسْطَرَةٌ", "latin": "Misṭaratun", "meaning": "Penggaris", "emoji": "📏", "example": "Penggaris untuk membuat garis." },
+    { "id": "kelas-5", "category": "kelas", "arabic": "سَبُّورَةٌ", "latin": "Sabūratun", "meaning": "Papan tulis", "emoji": "🧑‍🏫", "example": "Guru menulis di papan tulis." },
+    { "id": "kelas-6", "category": "kelas", "arabic": "كُرْسِيٌّ", "latin": "Kursiyyun", "meaning": "Kursi", "emoji": "🪑", "example": "Saya duduk di kursi." },
+    { "id": "kelas-7", "category": "kelas", "arabic": "مَكْتَبٌ", "latin": "Maktabun", "meaning": "Meja", "emoji": "🪵", "example": "Buku ada di atas meja." },
+    { "id": "kelas-8", "category": "kelas", "arabic": "حَقِيبَةٌ", "latin": "Ḥaqībatun", "meaning": "Tas", "emoji": "🎒", "example": "Saya membawa tas ke sekolah." },
+    { "id": "rumah-1", "category": "rumah", "arabic": "بَابٌ", "latin": "Bābun", "meaning": "Pintu", "emoji": "🚪", "example": "Tutup pintu, ya." },
+    { "id": "rumah-2", "category": "rumah", "arabic": "نَافِذَةٌ", "latin": "Nāfidhatun", "meaning": "Jendela", "emoji": "🪟", "example": "Buka jendela pada pagi hari." },
+    { "id": "rumah-3", "category": "rumah", "arabic": "سَرِيرٌ", "latin": "Sarīrun", "meaning": "Tempat tidur", "emoji": "🛏️", "example": "Saya tidur di tempat tidur." },
+    { "id": "rumah-4", "category": "rumah", "arabic": "طَاوِلَةٌ", "latin": "Ṭāwilatun", "meaning": "Meja", "emoji": "🪑", "example": "Makanan disajikan di atas meja." },
+    { "id": "rumah-5", "category": "rumah", "arabic": "مِرْآةٌ", "latin": "Mir'ātun", "meaning": "Cermin", "emoji": "🪞", "example": "Saya bercermin." },
+    { "id": "rumah-6", "category": "rumah", "arabic": "مِفْتَاحٌ", "latin": "Miftāḥun", "meaning": "Kunci", "emoji": "🔑", "example": "Kunci ada di dekat pintu." },
+    { "id": "rumah-7", "category": "rumah", "arabic": "ثَلَّاجَةٌ", "latin": "Thallājatun", "meaning": "Kulkas", "emoji": "🧊", "example": "Susu disimpan di kulkas." },
+    { "id": "rumah-8", "category": "rumah", "arabic": "مِصْبَاحٌ", "latin": "Miṣbāḥun", "meaning": "Lampu", "emoji": "💡", "example": "Nyalakan lampu saat gelap." },
+    { "id": "perpus-1", "category": "perpustakaan", "arabic": "كِتَابٌ", "latin": "Kitābun", "meaning": "Buku", "emoji": "📘", "example": "Saya membaca buku di perpustakaan." },
+    { "id": "perpus-2", "category": "perpustakaan", "arabic": "قَامُوسٌ", "latin": "Qāmūsun", "meaning": "Kamus", "emoji": "📖", "example": "Kamus membantu mencari arti kata." },
+    { "id": "perpus-3", "category": "perpustakaan", "arabic": "مَجَلَّةٌ", "latin": "Majallatun", "meaning": "Majalah", "emoji": "📰", "example": "Majalah berisi banyak informasi." },
+    { "id": "perpus-4", "category": "perpustakaan", "arabic": "حَاسُوبٌ", "latin": "Ḥāsūbun", "meaning": "Komputer", "emoji": "💻", "example": "Saya mencari informasi dengan komputer." },
+    { "id": "perpus-5", "category": "perpustakaan", "arabic": "رَفٌّ", "latin": "Raffun", "meaning": "Rak buku", "emoji": "🗄️", "example": "Buku disusun di rak buku." },
+    { "id": "perpus-6", "category": "perpustakaan", "arabic": "جَرِيدَةٌ", "latin": "Jarīdatun", "meaning": "Surat kabar", "emoji": "🗞️", "example": "Ayah membaca surat kabar." },
+    { "id": "perpus-7", "category": "perpustakaan", "arabic": "كُرْسِيٌّ", "latin": "Kursiyyun", "meaning": "Kursi", "emoji": "🪑", "example": "Pengunjung duduk di kursi." },
+    { "id": "perpus-8", "category": "perpustakaan", "arabic": "طَاوِلَةٌ", "latin": "Ṭāwilatun", "meaning": "Meja", "emoji": "🪵", "example": "Saya belajar di meja baca." }
+  ],
+  "scores": []
+}

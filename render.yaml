@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mufradat-ceria-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm run start:server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_ORIGIN
+        sync: false
