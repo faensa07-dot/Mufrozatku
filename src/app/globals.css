@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #f8faf7; color: #17251e; }
+button, input, textarea, select { font: inherit; }
+.arabic { font-family: "Noto Naskh Arabic", "Amiri", serif; direction: rtl; }

@@ -1,0 +1,11 @@
+"use client";
+import Link from "next/link";
+import { FormEvent,useEffect,useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+type Category={id:string,name:string,slug:string,description:string|null};
+export default function CategoriesPage(){const [rows,setRows]=useState<Category[]>([]);const [name,setName]=useState("");const [slug,setSlug]=useState("");const [description,setDescription]=useState("");const [error,setError]=useState("");const supabase=createClient();
+async function load(){const {data}=await supabase.from("categories").select("*").order("sort_order");setRows(data??[])}
+useEffect(()=>{load()},[]);
+async function submit(e:FormEvent){e.preventDefault();setError("");const {error}=await supabase.from("categories").insert({name,slug,description});if(error){setError(error.message);return;}setName("");setSlug("");setDescription("");load();}
+async function remove(id:string){const {error}=await supabase.from("categories").delete().eq("id",id);if(error)setError(error.message);else load();}
+return <main className="mx-auto max-w-4xl px-6 py-10"><Link href="/admin" className="text-emerald-700">← Pengelola</Link><h1 className="mt-4 text-3xl font-black">Kelola kategori</h1><form onSubmit={submit} className="mt-6 grid gap-3 rounded-2xl border bg-white p-5"><input required placeholder="Nama kategori, misalnya Di Sekolah" value={name} onChange={e=>setName(e.target.value)} className="rounded-xl border p-3"/><input required placeholder="slug: di-sekolah" value={slug} onChange={e=>setSlug(e.target.value)} className="rounded-xl border p-3"/><input placeholder="Frasa Arab (opsional)" value={description} onChange={e=>setDescription(e.target.value)} className="rounded-xl border p-3"/>{error&&<p className="text-sm text-red-600">{error}</p>}<button className="rounded-xl bg-emerald-700 p-3 font-bold text-white">Tambah kategori</button></form><div className="mt-6 space-y-2">{rows.map(r=><div key={r.id} className="flex justify-between rounded-xl border bg-white p-4"><div><b>{r.name}</b><p className="text-sm text-slate-500">/{r.slug}</p></div><button onClick={()=>remove(r.id)} className="text-sm text-red-700">Hapus</button></div>)}</div></main>}

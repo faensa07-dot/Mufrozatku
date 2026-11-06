@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import { requireUser } from "@/lib/auth";
+export default async function MufradatIndex(){await requireUser();const supabase=await createClient();const {data}=await supabase.from("categories").select("id,name,slug,description").order("sort_order");return <main className="mx-auto max-w-5xl px-6 py-10"><Link href="/dashboard" className="text-emerald-700">← Dashboard</Link><h1 className="mt-4 text-3xl font-black">Mufradat berdasarkan tempat</h1><div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{(data??[]).map(c=><Link key={c.id} href={`/mufradat/${c.slug}`} className="rounded-2xl border bg-white p-5 hover:shadow"><h2 className="text-xl font-bold">{c.name}</h2><p className="arabic mt-2 text-2xl text-emerald-800">{c.description}</p></Link>)}</div></main>}
